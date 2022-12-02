@@ -1,0 +1,21 @@
+Host *
+		AddKeysToAgent yes
+    IgnoreUnknown UseKeychain
+    UseKeychain yes
+		IdentityFile ~/.ssh/id_rsa
+
+Host labs.antfood.com
+    HostName 206.189.0.154
+		IdentityFile ~/.ssh/id_rsa
+    User pb
+
+
+# user: pb / pb@antegration
+Host antegrations.com
+		HostName 188.166.91.160
+		IdentityFile ~/.ssh/id_rsa
+     User pb
+
+Host git.us.qwasar.io
+  User git
+	IdentityFile ~/.ssh/qwasar_key_priv
