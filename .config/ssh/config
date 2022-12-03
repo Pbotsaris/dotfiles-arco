@@ -19,3 +19,8 @@ Host antegrations.com
 Host git.us.qwasar.io
   User git
 	IdentityFile ~/.ssh/qwasar_key_priv
+
+
+Host github.com
+ HostName github.com
+ IdentityFile ~/.ssh/id_rsa
