@@ -1,7 +1,0 @@
-2022/12/02-08:54:06.180 527 Reusing MANIFEST /home/pedro/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
-2022/12/02-08:54:06.180 527 Recovering log #18
-2022/12/02-08:54:06.228 527 Reusing old log /home/pedro/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000018.log 
-2022/12/02-08:54:06.228 527 Delete type=2 #17
-2022/12/02-08:54:52.243 526 Level-0 table #23: started
-2022/12/02-08:54:52.266 526 Level-0 table #23: 945198 bytes OK
-2022/12/02-08:54:52.269 526 Delete type=0 #18
