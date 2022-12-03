@@ -1,0 +1,7 @@
+/usr/lib
+├── corepack@0.15.1
+├── node-gyp@9.3.0
+├── nopt@7.0.0
+├── npm@8.19.2
+└── semver@7.3.8
+
