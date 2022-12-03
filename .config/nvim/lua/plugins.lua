@@ -35,7 +35,7 @@ return packer.startup {
     use 'wbthomason/packer.nvim'
 
     --  User interface
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+    use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
     use { 'kyazdani42/nvim-tree.lua',
       requires = {
         'kyazdani42/nvim-web-devicons', -- optional, for file icons
@@ -45,11 +45,11 @@ return packer.startup {
 
     use {
       'nvim-lualine/lualine.nvim',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true}
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
     use {
       'nvim-telescope/telescope.nvim',
-      requires = { {'nvim-lua/plenary.nvim'} }
+      requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
     --  completion
@@ -60,9 +60,9 @@ return packer.startup {
     use "saadparwaiz1/cmp_luasnip" -- snippet completions
     use "hrsh7th/cmp-nvim-lsp"
 
-     -- snippets
-     use "L3MON4D3/LuaSnip" --snippet engine
-     use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+    -- snippets
+    use "L3MON4D3/LuaSnip" --snippet engine
+    use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
     -- language specific
     use 'ray-x/go.nvim'
@@ -70,9 +70,21 @@ return packer.startup {
     use 'mhinz/vim-mix-format'
     use 'evanleck/vim-svelte'
     use 'elixir-editors/vim-elixir'
-    use {'prettier/vim-prettier', ['do'] = 'yarn install --frozen-lockfile --production',
-   ['for'] = {'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'}
-   }
+    use { 'prettier/vim-prettier', ['do'] = 'yarn install --frozen-lockfile --production',
+      ['for'] = { 'javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte',
+        'yaml', 'html' }
+    }
+
+    -- Language specific: Markdown preview
+    
+    use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+    })
+
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+      setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
 
     -- keybinds
     use 'folke/which-key.nvim'
@@ -93,9 +105,9 @@ return packer.startup {
 
     -- theme
     use 'EdenEast/nightfox.nvim'
+
     if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+      require("packer").sync()
+    end
   end
 }
-
