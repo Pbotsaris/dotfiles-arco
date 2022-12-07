@@ -13,5 +13,8 @@ require('lspconfig')['clangd'].setup {
      cmd = {'clangd', '--background-index', '--clang-tidy'}
 }
 
+require'lspconfig'.sqls.setup{ cmd = {"/home/pedro/go/bin/sqls", "-config", "/home/pedro/.config/sqls/config.yml"};
+}
+
 require("lsp.lsp-installer")
 require("lsp.handlers").setup {}
