@@ -96,6 +96,7 @@ A custom bin folder is exported to `$PATH ` from `~/.config/scripts`.
 - `clip`. clips first argument to the clipboard using `xclip`. Also aliased as `cpy`.
 - `package-backup` get a package list from pacman, npm and pip, pipes the list to 3 text files and creates a new directory in `$HOME/.packages` with today's date to 
 save those files.
+- `tts` text-to-speech current selection. This script bound to the `mod + Shift + s` in i3.
 
 #### C++ specifc scripts
 
