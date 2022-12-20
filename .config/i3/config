@@ -22,7 +22,6 @@ floating_modifier $mod
 # Start a terminal
 bindsym $mod+Return exec --no-startup-id alacritty
 
-
 # Network configuration
 
 bindsym $mod+n exec --no-startup-id networkmanager_dmenu
@@ -33,6 +32,9 @@ bindsym $mod+Shift+q kill
 # Start rofi (seach apps menu)
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -columns 3
 bindsym $mod+f exec --no-startup-id rofi -show filebrowser -columns 3
+
+# text-to-speech
+bindsym $mod+Shift+s exec --no-startup-id $HOME/.config/scripts/tts
 
 # Move between windows
 bindsym $mod+h focus left
