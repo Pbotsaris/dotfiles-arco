@@ -52,6 +52,20 @@ keymap('i', '(', '(<c-g>u', {noremap = true})
 keymap('i', '[', '[<c-g>u', {noremap = true})
 keymap('i', '{', '{<c-g>u', {noremap = true})
 
+-- Setting breakpoints via :lua require'dap'.toggle_breakpoint().
+-- Launching debug sessions and resuming execution via :lua require'dap'.continue().
+-- Stepping through code via :lua require'dap'.step_over() and :lua require'dap'.step_into().
+-- Inspecting the state via the built-in REPL: :lua require'dap'.repl.open() or using the widget UI (:help dap-widgets)
+
+-- debugger
+keymap('n', '<c-b>', ":lua require'dap'.toggle_breakpoint()<CR>",{noremap = true})
+keymap('n', '<c-c>', ":lua require'dap'.continue() <CR>", {noremap = true})
+keymap('n', '<c-o>', ":lua require'dap'.step_over() <CR>", {noremap = true})
+keymap('n', '<c-i>', ":lua require'dap'.step_into() <CR>", {noremap = true})
+keymap('n', '<c-d>', ":lua require'dap'.repl.open() <CR>", {noremap = true})
+
+
+
 -- n centers with z
 keymap('n', 'n', 'nzzzv', {noremap = true})
 keymap('n', 'N', 'Nzzzv', {noremap = true})

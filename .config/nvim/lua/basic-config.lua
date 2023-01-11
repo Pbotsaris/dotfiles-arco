@@ -48,6 +48,6 @@ set backupdir=~/.vim/.backup//
 au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
 set backupcopy=yes
 set undodir=~/.vim/.undo//
-
+let g:python3_host_prog = $HOME . '/.local/venv/nvim/bin/python'
 ]])
 

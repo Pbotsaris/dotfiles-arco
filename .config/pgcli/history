@@ -1,0 +1,710 @@
+
+# 2022-12-23 09:09:57.614766
++quit
+
+# 2022-12-23 09:10:25.348682
++SELECT * FROM cues
+
+# 2022-12-23 09:11:53.844087
++\q
+
+# 2022-12-23 09:16:20.961929
++\i examples/duplicated_entries.sql
+
+# 2022-12-23 09:19:13.280182
++select * from users;
+
+# 2022-12-23 09:22:05.460309
++    SELECT *,
++        row_number() OVER (PARTITION BY name ORDER BY id) as rn
++        FROM recording_instrumentations;
+
+# 2022-12-23 09:22:11.654171
++    SELECT *,
++        row_number() OVER (PARTITION BY name ORDER BY id) as rn
++        FROM users;
+
+# 2022-12-23 09:23:27.528858
++SELECT *,
++        row_number() OVER (PARTITION BY name ORDER BY id) as rn
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:24:12.555673
++SELECT *,
++        row_number() OVER (PARTITION BY name) as rn
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:25:59.296514
++SELECT *,
++        row_number() OVER (PARTITION BY id) as rn
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:28:57.919891
++SELECT *,
++        OVER (PARTITION BY id) as rn
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:32:28.713560
++SELECT *,
++        OVER (PARTITION BY id) 
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:32:53.768078
++SELECT *,
++        OVER (PARTITION BY name) 
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:33:08.470797
++SELECT *,
++        OVER (PARTITION BY name ORDER BY id) 
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:33:21.363513
++SELECT *,
++        row_number() OVER (PARTITION BY name) as rn
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:33:43.680096
++SELECT *,
++        row_number() OVER (PARTITION BY name)
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:35:00.517358
++SELECT *,
++        row_number() OVER (PARTITION BY name ORDER BY id)
++        FROM users
++        ORDER BY id;
+
+# 2022-12-23 09:41:50.187972
++SELECT MAX(id) FROM users;
+
+# 2022-12-23 09:45:38.232128
++\i examples/products.sql
+
+# 2022-12-23 09:45:58.166326
++clear
+
+# 2022-12-23 09:46:06.939503
++SELECT * from products;
+
+# 2022-12-23 09:46:36.334878
++SELECT name, AVG(cost) from products;
+
+# 2022-12-23 09:46:47.738308
++SELECT name, AVG(cost) from products GROUP BY name;
+
+# 2022-12-23 09:48:38.514380
++p
+
+# 2022-12-23 09:48:40.241423
++SELECT id, name, AVG(cost)
++        FROM products
++        GROUP BY name;
++
+
+# 2022-12-23 09:49:11.108898
++SELECT id, name, AVG(cost)
++                            FROM products
++                            GROUP BY name, id;
++
+
+# 2022-12-23 09:49:44.883573
++SELECT name, AVG(cost) from products GROUP BY name;
+
+# 2022-12-23 09:53:26.119670
++SELECT id, name, AVG() OVER ( PARTITION BY name ORDER BY id) FROM products ORDER BY id;
+
+# 2022-12-23 09:53:43.030010
++SELECT id, name, AVG(cost) OVER ( PARTITION BY name ORDER BY id) FROM products ORDER BY id;
+
+# 2022-12-23 09:54:39.104158
++SELECT name, COUNT(name) from products GROUP BY name;
+
+# 2022-12-23 09:55:39.381211
++SELECT id, name, COUNT(name) OVER ( PARTITION BY name ORDER BY id) FROM products ORDER BY id;
+
+# 2022-12-23 09:59:33.647682
++k+---------+---------------------+
++        | name    | avg                 |
++        |---------+---------------------|
++        | shoes   | 24.6666666666666667 |
++        | t-shirt | 12.5000000000000000 |
++        | jeans   | 70.0000000000000000 |
++        +---------+---------------------+
++
+
+# 2022-12-23 09:59:36.096674
++SELECT name,
++           COUNT(name) OVER ( PARTITION BY name ORDER BY name)
++        FROM products
++        ORDER BY name;
++
+
+# 2022-12-23 10:00:09.027307
++ SELECT id, name,
++           COUNT(name) OVER ( PARTITION BY name ORDER BY id)
++        FROM products
++        ORDER BY id;
++
++
+
+# 2022-12-23 10:05:47.487687
++ SELECT name,
++           COUNT(name) OVER ( PARTITION BY name ORDER BY name)
++        FROM products
++        ORDER BY name;
++
+
+# 2022-12-23 10:06:10.873159
++SELECT name,
++           COUNT(name) OVER ( PARTITION BY name ORDER BY name)
++        FROM products
++        ORDER BY COUNT(name);
++
+
+# 2022-12-23 10:06:44.986761
++SELECT name,
++           COUNT(name) OVER ( PARTITION BY name ORDER BY name)
++        FROM products;
++
+
+# 2022-12-24 08:47:23.811801
++SELECT * from names;
+
+# 2022-12-24 08:47:30.648825
++SELECT * from products;
+
+# 2023-01-01 22:22:18.600625
++\d compositions
+
+# 2023-01-01 22:22:24.587621
++\d composition
+
+# 2023-01-01 22:22:42.169874
++\c betterproblems
+
+# 2023-01-01 22:22:46.132214
++\d compositions
+
+# 2023-01-01 22:24:41.076200
++SELECT id, title from compostions;
+
+# 2023-01-01 22:24:49.840500
++SELECT id, title FROM compositions
+
+# 2023-01-01 22:25:13.920190
++SELECT id, title FROM compositions where id = 1;
+
+# 2023-01-03 06:02:18.072545
++\i test_queries/filter_test.sql
+
+# 2023-01-03 06:07:37.069326
++\d recordings
+
+# 2023-01-03 06:07:51.294562
++\i test_queries/filter_test.sql
+
+# 2023-01-03 06:08:50.539663
++select * from instrumentations
+
+# 2023-01-03 06:09:40.763670
++\i test_queries/filter_test.sql
+
+# 2023-01-03 06:11:43.954951
++select * from instrumentations
+
+# 2023-01-03 06:12:14.221454
++\i test_queries/filter_test.sql
+
+# 2023-01-03 06:12:45.183104
++   SELECT DISTINCT recording_id, COUNT(*)
++   FROM recording_instrumentations
++   WHERE instrumentation_id = 8 OR instrumentation_id = 11
++   GROUP BY recording_id
++   HAVING COUNT(*) > 1
++
+
+# 2023-01-03 06:13:04.260399
++   SELECT DISTINCT recording_id, COUNT(*)
++   FROM recording_instrumentations
++   WHERE instrumentation_id = 8
++   GROUP BY recording_id
++   HAVING COUNT(*) > 1
++
+
+# 2023-01-03 06:13:17.172713
++   SELECT DISTINCT recording_id, COUNT(*)
++   FROM recording_instrumentations
++   WHERE instrumentation_id = 11
++   GROUP BY recording_id
++   HAVING COUNT(*) > 1
++
+
+# 2023-01-03 06:13:33.948575
++   SELECT DISTINCT recording_id, COUNT(*)
++   FROM recording_instrumentations
++   WHERE instrumentation_id = 11
++   GROUP BY recording_id
++   
++
+
+# 2023-01-03 06:14:04.809514
++   SELECT DISTINCT recording_id, COUNT(*)
++   FROM recording_instrumentations
++   WHERE instrumentation_id = 11
++   GROUP BY recording_id
++   HAVING COUNT(*) > 0
++
+
+# 2023-01-03 06:14:36.432895
++   SELECT DISTINCT recording_id, COUNT(*)
++   FROM recording_instrumentations
++   WHERE instrumentation_id = 11
++   GROUP BY recording_id
++   HAVING COUNT(*) > 0
+
+# 2023-01-03 06:14:42.269066
++   SELECT DISTINCT recording_id, COUN   FROM recording_instrumentations
++   WHERE instrumentation_id = 11
++   GROUP BY recording_id
++   
++
+
+# 2023-01-03 06:14:47.094413
++\i test_queries/filter_test.sql
+
+# 2023-01-03 06:37:20.604084
++\i test_queries/many_to_many.sql
+
+# 2023-01-03 06:41:37.133041
++j
+
+# 2023-01-03 06:41:38.477053
++\i test_queries/many_to_many.sql
+
+# 2023-01-03 06:47:32.238187
++\i test_queries/filter_intrumentation.sql
+
+# 2023-01-03 06:47:59.992224
++SELECT id, title FROM compositions where id = 1;
+
+# 2023-01-03 06:48:13.703243
++\i test_queries/filter_test.sql
+
+# 2023-01-03 06:49:51.607945
++clear
+
+# 2023-01-03 06:50:03.848373
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 06:50:47.141089
++q
+
+# 2023-01-03 06:50:48.632146
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 06:51:20.605603
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 06:54:17.861120
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 06:54:52.528659
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 06:55:02.067644
++SELECT * from instrumentations
+
+# 2023-01-03 06:55:19.287064
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 06:56:35.540611
++SELECT * from instrumentations
+
+# 2023-01-03 06:56:38.543633
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 07:01:04.560522
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 07:02:02.472508
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 07:02:05.691655
++SELECT * from instrumentations
+
+# 2023-01-03 07:02:26.025805
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 07:08:48.709912
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 07:10:10.076492
++\i test_queries/filter_instrumentation_join.sql.sql
+
+# 2023-01-03 07:10:12.122442
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 07:10:59.054368
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 07:11:13.518600
++\i test_queries/filter_instrumentation_join.sql
+
+# 2023-01-03 07:11:25.348867
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 08:59:22.447723
++\dt
+
+# 2023-01-03 08:59:39.720910
++select * from gen
+
+# 2023-01-03 08:59:45.419131
++select * from information_schema
+
+# 2023-01-03 08:59:52.603301
++select * from regconfigin()
+
+# 2023-01-03 09:00:02.629484
++select * from genres
+
+# 2023-01-03 09:03:08.596569
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 09:33:16.305777
++select * from genres
+
+# 2023-01-03 09:33:29.348877
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 09:38:24.984225
++\i test_queries/filter_many.sql
+
+# 2023-01-03 09:41:49.914834
++\i test_queries/filter_instrumentation.sql
+
+# 2023-01-03 09:42:28.201587
++\i test_queries/filter_many.sql
+
+# 2023-01-03 10:04:10.876019
++\dt 
+
+# 2023-01-03 10:04:32.617422
++select * from pg_search_documents
+
+# 2023-01-03 10:04:44.017714
++\d pg_search_documents
+
+# 2023-01-03 10:20:47.294683
++COUNT (DIST
+
+# 2023-01-03 10:21:23.484309
++COUNT (DISTINCT recording_genres.genre.id)
+
+# 2023-01-03 10:21:58.928054
++SELECT COUNT (DISTINCT recording_genres.genre.id)
+
+# 2023-01-03 10:22:16.151410
++SELECT COUNT (DISTINCT recording_genres.id)
+
+# 2023-01-03 10:25:53.893300
++\dt
+
+# 2023-01-03 10:26:08.686597
++\d moods
+
+# 2023-01-03 10:26:30.224088
++\d recordings
+
+# 2023-01-03 10:28:16.518151
++\d moods
+
+# 2023-01-03 10:28:50.678687
++SELECT * from moods where recording_id = 3
+
+# 2023-01-03 21:26:28.833339
++\dt
+
+# 2023-01-03 21:39:00.055706
++\i test_queries/filter_many.sql
+
+# 2023-01-03 21:52:40.699892
++\d recordings
+
+# 2023-01-03 21:55:23.618793
++\i test_queries/filter_many.sql
+
+# 2023-01-03 21:59:58.115090
++\i test_queries/filter_many.sql]
+
+# 2023-01-03 22:00:00.804978
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:01:20.592411
++\d conventions
+
+# 2023-01-03 22:04:24.748680
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:05:26.564807
++\i test_queries/filter_many.sqlq
+
+# 2023-01-03 22:07:07.721705
++
++SET STATISTICS IO, TIME ON;
+
+# 2023-01-03 22:09:42.410890
++ANALYZE SELECT * from recordings;
+
+# 2023-01-03 22:09:49.732803
++ANALYZE recordings;
+
+# 2023-01-03 22:10:45.403690
++SELECT * FROM recordings ANALYZE
+
+# 2023-01-03 22:10:53.150743
++(SELECT * FROM recordings) ANALYZE
+
+# 2023-01-03 22:12:04.163241
++ANALYZE recordings;
+
+# 2023-01-03 22:12:31.398619
++ANALYZE recordings (recording_id);
+
+# 2023-01-03 22:12:54.054044
++ANALYZE recordings;
+
+# 2023-01-03 22:13:11.263267
++ANALYZE recordings (recording_title);
+
+# 2023-01-03 22:13:24.451595
++ANALYZE VERBOSE recordings (recording_title);
+
+# 2023-01-03 22:14:09.360315
++SELECT * FROM recordings LIMIT 500;
+
+# 2023-01-03 22:14:41.042854
++\dt
+
+# 2023-01-03 22:15:03.897601
++select * from recording_languages;
+
+# 2023-01-03 22:15:15.394250
++select * from languages;
+
+# 2023-01-03 22:18:05.793288
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:20:16.893668
++select * from languages;
+
+# 2023-01-03 22:20:19.762448
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:24:21.537629
++\dt
+
+# 2023-01-03 22:25:32.479027
++select * from vocals;
+
+# 2023-01-03 22:28:38.094261
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:38:02.450664
++clear
+
+# 2023-01-03 22:38:11.170747
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:43:38.549687
++select * from vocals;
+
+# 2023-01-03 22:44:07.741275
++\i test_queries/filter_many.sql
+
+# 2023-01-03 22:46:49.302082
++\i test_queries/filter_many.sqlk
+
+# 2023-01-03 22:46:54.680933
++\i test_queries/filter_many.sql
+
+# 2023-01-03 23:05:05.033112
++ls
+
+# 2023-01-03 23:05:11.170518
++\d recordings;
+
+# 2023-01-03 23:06:04.769487
++\i test_queries/filter_many.sql
+
+# 2023-01-04 08:24:18.304533
++\dt
+
+# 2023-01-04 08:25:40.972092
++\i test_queries/filter_many.sql
+
+# 2023-01-04 08:47:13.801909
++\dt
+
+# 2023-01-04 08:49:22.618485
++\i test_queries/filter_many.sql
+
+# 2023-01-04 08:50:21.557537
++\dt
+
+# 2023-01-04 08:51:52.843025
++\i test_queries/filter_many.sql
+
+# 2023-01-04 08:52:09.058187
++select * from shapes;
+
+# 2023-01-04 08:52:18.848626
++\i test_queries/filter_many.sql
+
+# 2023-01-04 08:53:21.074861
++select * from recordings where recording_id = 36605
+
+# 2023-01-04 08:53:27.548917
++select * from recordings where id = 36605;
+
+# 2023-01-04 08:53:39.507183
++select title, shape_id from recordings where id = 36605;
+
+# 2023-01-04 08:53:45.232163
++select recording_title, shape_id from recordings where id = 36605;
+
+# 2023-01-04 08:53:58.107419
++\i test_queries/filter_many.sql
+
+# 2023-01-04 08:54:40.024149
++\dt
+
+# 2023-01-04 08:55:39.818244
++\i test_queries/filter_many.sql
+
+# 2023-01-04 09:23:12.562312
++select * from moods;
+
+# 2023-01-04 09:23:49.148518
++select * recording_moods;
+
+# 2023-01-04 09:24:00.554554
++select moods from recordings;
+
+# 2023-01-04 09:24:04.405588
++\d recordings
+
+# 2023-01-04 09:24:43.690458
++select * from moods;
+
+# 2023-01-04 09:44:25.119061
++sqrt(24)
+
+# 2023-01-04 09:44:28.754091
++select sqrt(24)
+
+# 2023-01-04 09:48:24.868360
++select ABS(-1)
+
+# 2023-01-04 09:49:38.924794
++\i test_queries/moods.sql
+
+# 2023-01-04 09:51:58.051339
++SELECT COS(10)
+
+# 2023-01-04 09:52:02.641474
++\i test_queries/moods.sql
+
+# 2023-01-05 20:50:55.703617
++\d compositions
+
+# 2023-01-05 20:54:46.129251
++\d recordings
+
+# 2023-01-05 20:56:23.963454
++select airtable_id from recordings
+
+# 2023-01-05 21:01:43.242208
++select catalog from recordings
+
+# 2023-01-05 21:01:53.114694
++select library from recordings
+
+# 2023-01-05 21:08:05.110461
++\d cue
+
+# 2023-01-05 21:08:06.736571
++\d cues
+
+# 2023-01-05 21:08:14.873826
++select * from cues
+
+# 2023-01-05 21:09:45.489346
++select * from tiers;
+
+# 2023-01-05 21:12:49.479709
++select * from tonalities;
+
+# 2023-01-05 21:13:47.272853
++select * from meters;
+
+# 2023-01-05 21:14:46.102031
++select * from key_signatures
+
+# 2023-01-05 21:16:36.988964
++select * from shapes
+
+# 2023-01-05 21:24:27.820637
++\d moods
+
+# 2023-01-05 21:34:06.282679
++\dt
+
+# 2023-01-05 21:34:39.142909
++select * from mood_words
+
+# 2023-01-05 22:15:19.883601
++select * from instrumentations
+
+# 2023-01-05 22:16:05.376368
++select * from instrumentations order by id;
+
+# 2023-01-05 22:28:25.427945
++\dt
+
+# 2023-01-05 22:28:59.056495
++select * from conventions;
+
+# 2023-01-05 22:34:33.205628
++select * from vocals order by id;
+
+# 2023-01-05 22:36:13.375525
++select * from languages order by id;
+
+# 2023-01-05 22:37:33.798974
++\dt
+
+# 2023-01-06 09:41:05.826705
++select * from genres;
+
+# 2023-01-06 09:41:26.482619
++select * from genres order by id;
+
+# 2023-01-06 09:59:45.791226
++\dt
+
+# 2023-01-06 10:00:35.310620
++select status from recordings;
+
+# 2023-01-07 08:36:22.155164
++quit

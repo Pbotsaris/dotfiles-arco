@@ -66,6 +66,7 @@ return packer.startup {
 
     -- language specific
     use 'ray-x/go.nvim'
+    use 'averms/black-nvim'
     use 'pangloss/vim-javascript'
     use 'mhinz/vim-mix-format'
     use 'evanleck/vim-svelte'
@@ -75,8 +76,12 @@ return packer.startup {
         'yaml', 'html' }
     }
 
+    -- language specific: Dart & Flutter
+
+    use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
+
     -- Language specific: Markdown preview
-    
+
     use({
       "iamcco/markdown-preview.nvim",
       run = function() vim.fn["mkdp#util#install"]() end,
@@ -102,6 +107,9 @@ return packer.startup {
     use "neovim/nvim-lspconfig" -- enable LSP
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+
+    -- Debug
+    use 'mfussenegger/nvim-dap'
 
     -- theme
     use 'EdenEast/nightfox.nvim'
