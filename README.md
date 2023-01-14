@@ -78,6 +78,10 @@ walpaper manager: nitrogen
 
 autojump with `j`
 
+## Android SDK + Flutter
+
+Find a detailed [walkthrough here](docs/ANDROID-SDK.md).
+
 ## Shell
 
 Shell is managed using oh my zsh. Plugins are: `archlinux`, `zsh-syntax-highlighting`, `zsh-autosuggestions`, `autojump` and `dotbare`.
