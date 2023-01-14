@@ -80,7 +80,7 @@ To get a list of downloadable system images for the android emulator
 
 To install
 
-    sdkmanager --instal <image-name>
+    sdkmanager --install <image-name>
   
 
 At time of writting this is what was installed
@@ -96,5 +96,12 @@ This is a simplified version of the above command
 
     avdmanager create avd -n <name> -k <image-name>
 
+
+Check you avd lists
+
+    emulator -list-avd
+
+
+Run
 
     

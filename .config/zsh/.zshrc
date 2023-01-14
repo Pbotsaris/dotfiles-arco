@@ -207,6 +207,7 @@ source /usr/share/nvm/init-nvm.sh
  alias connect-bluetooth="connect-bluetooth.sh"
  alias vim="nvim"
  alias a="cat ~/.config/zsh/.zshrc | grep alias"
+ alias emulator="cd /opt/android-sdk/emulator; emulator"
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 

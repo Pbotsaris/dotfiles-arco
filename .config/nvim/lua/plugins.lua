@@ -77,6 +77,8 @@ return packer.startup {
     }
 
     -- language specific: Dart & Flutter
+    use 'dart-lang/dart-vim-plugin'
+    use 'thosakwe/vim-flutter'
 
    -- use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 
