@@ -89,8 +89,6 @@ autoload -U promptinit; promptinit
 zstyle ':prompt:pure:prompt:*' color '#998a96'
 prompt pure
 
-
-
 # USER CONFIG
 
 ## add gem bins to $PATH
@@ -143,6 +141,18 @@ precmd_functions+=(_fix_cursot)
 # set dotbare(dotfiles) to custom folder.
 export DOTBARE_DIR="$HOME/.dotfiles"
 
+
+# Android SDK
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/build-tools/33.0.1/
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin/
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+
+# Java
+export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
+export ANDROID_SDK_ROOT='/opt/android-sdk'
 
 PATH=$PATH:$HOME/.config/scripts/
 # for whatever reason I need to export these locale

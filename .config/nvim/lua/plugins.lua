@@ -78,7 +78,7 @@ return packer.startup {
 
     -- language specific: Dart & Flutter
 
-    use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
+   -- use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- Language specific: Markdown preview
 
