@@ -78,9 +78,13 @@ walpaper manager: nitrogen
 
 autojump with `j`
 
-## Android SDK + Flutter
+### Android SDK + Flutter
 
 Find a detailed [walkthrough here](docs/ANDROID-SDK.md).
+
+### Docker
+
+Installation [guide here](docs/DOCKER.md)
 
 ## Shell
 
