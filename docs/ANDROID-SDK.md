@@ -6,7 +6,7 @@ Install flutter
 
     yay -S flutter
 
-**IMPORTANT**: At the time of writting only `open-jdk8` worked for this installation. 
+**IMPORTANT**: At the time of writting only `open-jdk11` worked for this installation. 
 
 
 Create group for flutter, add your user to the group and set permissions
@@ -48,7 +48,7 @@ Exports to `.zshrc`. It should be in your config though double check with `shell
 Also export java - attention for the `openjdk` version in the path that must match your installation.
 
     # Java
-    export JAVA_HOME='/usr/lib/jvm/java-8-openjdk'
+    export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
     
 **Warning:** If you are having problems and looking for answers, do not export this 
 
@@ -69,6 +69,10 @@ Check installation with
       flutter doctor
 
 
+May need to set android-sdk permission
+
+     sudo chown -R $(whoami) $ANDROID_HOME 
+
 
 ## Android Emulator
 
@@ -77,31 +81,26 @@ To get a list of downloadable system images for the android emulator
 
     sdkmanager --list
 
-
 To install
 
     sdkmanager --install <image-name>
   
 
-At time of writting this is what was installed
-
-    sdkmanager --install "system-images;android-33;google_apis;arm64-v8a" 
-
-Then generated the emulator `pixel_5_api33_google_atd_emulator`
-
-    echo "no" | avdmanager --verbose create avd --force --name "pixel_5_api33_google_atd_emulator" --package "system-images;android-33;google_apis;arm64-v8a" --abi "arm64-v8a" --device "pixel_5"
-
-
-This is a simplified version of the above command
+  Create image
 
     avdmanager create avd -n <name> -k <image-name>
-
 
 Check you avd lists
 
     emulator -list-avd
 
+Run emulator
 
-Run
+    emulator -avd <avd-name>
 
-    
+### Run flutter
+
+    flutter run
+
+this will make the flutter app to in the emulator
+
