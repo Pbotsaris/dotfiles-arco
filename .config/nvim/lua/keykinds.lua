@@ -45,12 +45,13 @@ keymap('n','<c-j>', '<Esc>:m .+1<CR>==', {noremap = true})
 keymap('i','<c-j>', '<Esc>:m .+1<CR>==', {noremap = true})
 keymap('v','J', ":m '>+1<CR>gv=gv", {noremap = true})
 
--- undo breakpoints
 keymap('i', ',', ',<c-g>u', {noremap = true})
+-- undo breakpoints
 keymap('i', '.', '.<c-g>u', {noremap = true})
 keymap('i', '(', '(<c-g>u', {noremap = true})
 keymap('i', '[', '[<c-g>u', {noremap = true})
 keymap('i', '{', '{<c-g>u', {noremap = true})
+
 
 -- Setting breakpoints via :lua require'dap'.toggle_breakpoint().
 -- Launching debug sessions and resuming execution via :lua require'dap'.continue().
@@ -63,7 +64,6 @@ keymap('n', '<c-c>', ":lua require'dap'.continue() <CR>", {noremap = true})
 keymap('n', '<c-o>', ":lua require'dap'.step_over() <CR>", {noremap = true})
 keymap('n', '<c-i>', ":lua require'dap'.step_into() <CR>", {noremap = true})
 keymap('n', '<c-d>', ":lua require'dap'.repl.open() <CR>", {noremap = true})
-
 
 
 -- n centers with z

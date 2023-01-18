@@ -24,6 +24,15 @@ wk.register({
   w = { '<cmd>w!<cr>', 'save file' },
   q = { '<cmd>q!<cr>', 'quit' },
   p = { ':Prettier', 'Prettier' },
+  a = {
+    name = 'Flutter Commands',
+    a = { ':FlutterRun<CR>', 'Run Flutter' },
+    q = { ':FlutterQuit<CR>', 'Quit Flutter' },
+    r = { ':FlutterHotReload<CR>', 'Auto Reload Flutter' },
+    R = { ':FlutterHotRestart<CR>', 'Restarts Flutter Auto Reloaad' },
+    f = { ':FlutterVisualDebug<CR>', 'Restarts Flutter Auto Reload' },
+    l = { ':FlutterEmulators<CR>', 'Lists Flutter Emulator' },
+  },
   f = { "<cmd>lua require('telescope.builtin').find_files()<CR>", 'Telescope files' },
   s = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Telescope Git Files" },
   g = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", "telescope grep" },
@@ -35,6 +44,6 @@ wk.register({
   t = { ":sp<CR> :term<CR> :resize 20N<CR> i", 'Open terminal' },
   h = { ":sp<CR>", 'Horizontal split' },
   v = { ":vs<CR>", 'Vertical split' },
-  m = { "<cmd>lua vim.lsp.buf.format()<CR>", "Format"}
+  m = { "<cmd>lua vim.lsp.buf.format()<CR>", "Format" }
 }
   , opts)

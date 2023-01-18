@@ -14,3 +14,4 @@ require('telescope-config')
 require('go').setup()
 require('nvim-autopairs').setup {}
 require('nightfox')
+
