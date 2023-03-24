@@ -60,6 +60,9 @@ return packer.startup {
     use "saadparwaiz1/cmp_luasnip" -- snippet completions
     use "hrsh7th/cmp-nvim-lsp"
 
+    -- copilot
+    use "github/copilot.vim"
+
     -- snippets
     use "L3MON4D3/LuaSnip" --snippet engine
     use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
@@ -84,10 +87,10 @@ return packer.startup {
 
     -- Language specific: Markdown preview
 
-    use({
-      "iamcco/markdown-preview.nvim",
-      run = function() vim.fn["mkdp#util#install"]() end,
-    })
+ --   use({
+ --     "iamcco/markdown-preview.nvim",
+ --     run = function() vim.fn["mkdp#util#install"]() end,
+ --   })
 
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
       setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
@@ -107,7 +110,9 @@ return packer.startup {
 
     -- LSP
     use "neovim/nvim-lspconfig" -- enable LSP
-    use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+   -- use "williamboman/nvim-lsp-installer"  (deprecated)
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
     -- Debug

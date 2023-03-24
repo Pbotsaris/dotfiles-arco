@@ -71,3 +71,25 @@ keymap('n', 'n', 'nzzzv', {noremap = true})
 keymap('n', 'N', 'Nzzzv', {noremap = true})
 
 keymap('n', '<c-{>', 'ysiw}', {noremap = true})
+
+
+-- lsp
+  vim.keymap.set( "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+  vim.keymap.set( "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+  vim.keymap.set( "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+  vim.keymap.set( "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+  vim.keymap.set( "n", "<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+  vim.keymap.set( "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+  vim.keymap.set( "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+  vim.keymap.set( "n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+
+ -- vikeymap_setap(bufnr, "n", "<leader>p", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  vim.keymap.set( "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
+  vim.keymap.set( "n", "gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>')
+  vim.keymap.set( "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
+  vim.keymap.set( "n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>")
+
+
+  -- write a kepmap that change the background color of current line
+  vim.keymap.set( "n", "<leader>l", "<cmd>lua vim.diagnostic.setloclist()<CR>")
+

@@ -25,20 +25,13 @@ if [ -z "$1" ]; then
 		printf "	$bld $ $end t a $des  <sesh-name> $end\t\t\t attach/open session\n"
 		printf "	$bld $ $end t i $des  <sesh-name> $end\t\t\t See all sessions, panes and windows\n"
 		printf "	$bld $ $end t ls $des <sesh-name> $end\t\t\t List all sessions\n"
-		printf "	$bld $ $end t docs $spc $spc $spc $spc \t\t\t$end list a couple tmux commands\n"
 		printf "	$bld $ $end t c $spc $spc $spc $spc $psc $spc \t\t\t$end Open config\n"
 		echo " "
 fi
 
 if [ "$1" == "c" ];then
-		vim ~/.tmux.conf
+		nvim ~/.config/tmux/tmux.conf
 fi
-
-if [ "$1" == "docs" ];then
-		more "$HOME/.dotfiles/docs/tmux-cmd.txt"
-fi
-
-
 
 if [ "$1" == "n" ]; then
 		if [ -z $2 ];then 

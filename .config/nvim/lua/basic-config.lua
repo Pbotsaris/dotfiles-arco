@@ -30,13 +30,13 @@ vim.o.showtabline = 2
 vim.o.signcolumn = 'yes'
 vim.o.mouse = 'a'
 
--- dir tree
---vim.g["netrw_banner"] = 0
---vim.g["netrw_liststyle"] = 3
---vim.g["netrw_winsize"] = 25
+-- copilot work with <tab>
+vim.g.copilot_no_tab_map = true
 
 -- vim script to convert
 vim.cmd([[
+" keymap for copilot
+imap <silent><script><expr> <C-c> copilot#Accept("\<CR>")
 set expandtab
 set encoding=UTF-8
 set softtabstop=3
