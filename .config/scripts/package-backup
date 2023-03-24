@@ -21,7 +21,7 @@ echo -e "Listing pacman and saving to:${CYAN}$PACMAN${NC}"
 sudo pacman -Qe > "$PACMAN" 
 echo "- Done!"
 echo -e "Listing yay and saving to:${CYAN}$YAY${NC}"
-sudo yay -Qe > "$YAY" 
+yay -Qe > "$YAY" 
 echo "- Done!"
 
 echo -e "Listing pip and saving to:${CYAN}$PIP${NC}"
