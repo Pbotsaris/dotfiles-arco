@@ -208,6 +208,7 @@ source /usr/share/nvm/init-nvm.sh
  alias vim="nvim"
  alias a="cat ~/.config/zsh/.zshrc | grep alias"
  alias emulator="cd /opt/android-sdk/emulator; emulator"
+ alias fixkey = "/usr/local/bin/arcolinux-fix-pacman-databases-and-keys"
 
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
