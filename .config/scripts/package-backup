@@ -14,17 +14,21 @@ mkdir -p "$D"
 PACMAN="$D/pacman-$DATE.txt"
 PIP="$D/pip-$DATE.txt"
 NPM="$D/npm-$DATE.txt"
+YAY="$D/yay-$DATE.txt"
 echo ""
 
 echo -e "Listing pacman and saving to:${CYAN}$PACMAN${NC}"
 sudo pacman -Qe > "$PACMAN" 
 echo "- Done!"
+echo -e "Listing yay and saving to:${CYAN}$YAY${NC}"
+sudo yay -Qe > "$YAY" 
+echo "- Done!"
 
-echo -e "Listing pacman and saving to:${CYAN}$PIP${NC}"
+echo -e "Listing pip and saving to:${CYAN}$PIP${NC}"
 pip list > "$PIP"
 echo "- Done!"
 
-echo -e "Listing pacman and saving to:${CYAN}$NPM${NC}"
+echo -e "Listing npm and saving to:${CYAN}$NPM${NC}"
 npm ls -g > "$NPM"
 echo "- All done!"
 
