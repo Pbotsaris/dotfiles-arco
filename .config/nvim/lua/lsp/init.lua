@@ -30,9 +30,12 @@ require'lspconfig'.solargraph.setup {
 require'lspconfig'.tsserver.setup {}
 require'lspconfig'.cmake.setup {}
 require'lspconfig'.svelte.setup {}
+require'lspconfig'.tsserver.setup {}
 require'lspconfig'.tailwindcss.setup {}
 require'lspconfig'.gopls.setup {}
 require'lspconfig'.bashls.setup {}
+require'lspconfig'.elixirls.setup {}
+require'lspconfig'.cssls.setup {}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true

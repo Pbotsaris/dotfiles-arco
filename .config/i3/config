@@ -10,6 +10,9 @@
 # Default modkey
 set $mod Mod4
 
+# remove this
+for_window [class="passmanager"] floating enable 
+
 # Hide titlebar
 new_window pixel
 

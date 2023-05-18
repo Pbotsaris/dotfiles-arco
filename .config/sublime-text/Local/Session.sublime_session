@@ -1,0 +1,521 @@
+{
+	"file_history":
+	[
+		"/home/pedro/.cache/.fr-4Y2501/2dgameengine/src/Systems/RenderColliderSystem.h",
+		"/home/pedro/.cache/.fr-G3P501/2dgameengine/src/Systems/MovementSystem.h",
+		"/home/pedro/.cache/.fr-RVUU01/2dgameengine/src/ECS/ECS.h",
+		"/home/pedro/Downloads/openai.env",
+		"/home/pedro/Downloads/openai (1).env"
+	],
+	"folder_history":
+	[
+	],
+	"last_version": 4143,
+	"last_window_id": 1,
+	"log_indexing": false,
+	"next_update_check": 1678946375,
+	"settings":
+	{
+		"new_window_full_screen": false,
+		"new_window_height": 1402.0,
+		"new_window_maximized": false,
+		"new_window_position":
+		[
+			1722.0,
+			65.0
+		],
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+				]
+			},
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 0.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/pedro/.cache/.fr-4Y2501/2dgameengine/src/Systems/RenderColliderSystem.h",
+				"/home/pedro/.cache/.fr-G3P501/2dgameengine/src/Systems/MovementSystem.h",
+				"/home/pedro/.cache/.fr-RVUU01/2dgameengine/src/ECS/ECS.h",
+				"/home/pedro/Downloads/openai.env",
+				"/home/pedro/Downloads/openai (1).env"
+			],
+			"find":
+			{
+				"height": 26.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"addEnti"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"scrollbar_highlights": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"use_gitignore": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 26.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 48.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 150.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 1716.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+				]
+			},
+			"buffers":
+			[
+				{
+					"contents": "#ifndef ECS_H\n#define ECS_H\n\n#include \"../Logger/Logger.h\"\n#include <vector>\n#include <bitset>\n#include <set>\n#include <unordered_map>\n#include <typeindex>\n#include <memory>\n\nconst unsigned int MAX_COMPONENTS = 32;\n\n////////////////////////////////////////////////////////////////////////////////\n// Signature\n////////////////////////////////////////////////////////////////////////////////\n// We use a bitset (1s and 0s) to keep track of which components an entity has,\n// and also helps keep track of which entities a system is interested in.\n////////////////////////////////////////////////////////////////////////////////\ntypedef std::bitset<MAX_COMPONENTS> Signature;\n\nstruct IComponent {\n    protected:\n        static int nextId;\n};\n\n// Used to assign a unique id to a component type\ntemplate <typename T>\nclass Component: public IComponent {\n    // Returns the unique id of Component<T>\n    static int GetId() {\n        static auto id = nextId++;\n        return id;\n    }\n};\n\nclass Entity {\n    private:\n        int id;\n\n    public:\n        Entity(int id): id(id) {};\n        Entity(const Entity& entity) = default;\n        int GetId() const;\n       \n        Entity& operator =(const Entity& other) = default;\n        bool operator ==(const Entity& other) const { return id == other.id; }\n        bool operator !=(const Entity& other) const { return id != other.id; }\n        bool operator >(const Entity& other) const { return id > other.id; }\n        bool operator <(const Entity& other) const { return id < other.id; }\n};\n\n////////////////////////////////////////////////////////////////////////////////\n// System\n////////////////////////////////////////////////////////////////////////////////\n// The system processes entities that contain a specific signature\n////////////////////////////////////////////////////////////////////////////////\nclass System {\n    private:\n        Signature componentSignature;\n        std::vector<Entity> entities;\n\n    public:\n        System() = default;\n        ~System() = default;\n        \n        void AddEntityToSystem(Entity entity);\n        void RemoveEntityFromSystem(Entity entity);\n        std::vector<Entity> GetSystemEntities() const;\n        const Signature& GetComponentSignature() const;\n\n        // Defines the component type that entities must have to be considered by the system\n        template <typename TComponent> void RequireComponent();\n};\n\n////////////////////////////////////////////////////////////////////////////////\n// Pool\n////////////////////////////////////////////////////////////////////////////////\n// A pool is just a vector (contiguous data) of objects of type T\n////////////////////////////////////////////////////////////////////////////////\nclass IPool {\n    public:\n        virtual ~IPool() {}\n};\n\ntemplate <typename T>\nclass Pool: public IPool {\n    private:\n        std::vector<T> data;\n\n    public:\n        Pool(int size = 100) {\n            data.resize(size);\n        }\n\n        virtual ~Pool() = default;\n\n        bool isEmpty() const {\n            return data.empty();\n        }\n\n        int GetSize() const {\n            return data.size();\n        }\n\n        void Resize(int n) {\n            data.resize(n);\n        }\n\n        void Clear() {\n            data.clear();\n        }\n\n        void Add(T object) {\n            data.push_back(object);\n        }\n\n        void Set(int index, T object) {\n            data[index] = object;\n        }\n\n        T& Get(int index) {\n            return static_cast<T&>(data[index]);\n        }\n\n        T& operator [](unsigned int index) {\n            return data[index];\n        }\n};\n\n////////////////////////////////////////////////////////////////////////////////\n// Registry\n////////////////////////////////////////////////////////////////////////////////\n// The registry manages the creation and destruction of entities, add systems,\n// and components.\n////////////////////////////////////////////////////////////////////////////////\nclass Registry {\n    private:\n        int numEntities = 0;\n\n        // Vector of component pools, each pool contains all the data for a certain compoenent type\n        // [Vector index = component type id]\n        // [Pool index = entity id]\n        std::vector<std::shared_ptr<IPool>> componentPools;\n\n        // Vector of component signatures per entity, saying which component is turned \"on\" for a given entity\n        // [Vector index = entity id]\n        std::vector<Signature> entityComponentSignatures;\n\n        // Map of active systems\n        // [Map key = system type id]\n        std::unordered_map<std::type_index, std::shared_ptr<System>> systems;\n\n        // Set of entities that are flagged to be added or removed in the next registry Update()\n        std::set<Entity> entitiesToBeAdded;\n        std::set<Entity> entitiesToBeKilled;\n\n    public:\n        Registry() {\n            Logger::Log(\"Registry constructor called\");\n        }\n        \n        ~Registry() {\n            Logger::Log(\"Registry destructor called\");\n        }\n\n        // The registry Update() finally processes the entities that are waiting to be added/killed to the systems\n        void Update();\n        \n        // Entity management\n        Entity CreateEntity();\n\n        // Component management\n        template <typename TComponent, typename ...TArgs> void AddComponent(Entity entity, TArgs&& ...args);\n        template <typename TComponent> void RemoveComponent(Entity entity);\n\t\ttemplate <typename TComponent> bool HasComponent(Entity entity) const;\n\n        // System management\n        template <typename TSystem, typename ...TArgs> void AddSystem(TArgs&& ...args);\n        template <typename TSystem> void RemoveSystem();\n        template <typename TSystem> bool HasSystem() const;\n        template <typename TSystem> TSystem& GetSystem() const;\n\n        // Checks the component signature of an entity and add the entity to the systems\n        // that are interested in it\n        void AddEntityToSystems(Entity entity);\n};\n\ntemplate <typename TComponent>\nvoid System::RequireComponent() {\n    const auto componentId = Component<TComponent>::GetId();\n    componentSignature.set(componentId);\n}\n\ntemplate <typename TSystem, typename ...TArgs>\nvoid Registry::AddSystem(TArgs&& ...args) {\n    std::shared_ptr<TSystem> newSystem = std::make_shared<TSystem>(std::forward<TArgs>(args)...);\n    systems.insert(std::make_pair(std::type_index(typeid(TSystem)), newSystem));\n}\n\ntemplate <typename TSystem>\nvoid Registry::RemoveSystem() {\n    auto system = systems.find(std::type_index(typeid(TSystem)));\n    systems.erase(system);\n}\n\ntemplate <typename TSystem>\nbool Registry::HasSystem() const {\n    return systems.find(std::type_index(typeid(TSystem))) != systems.end();\n}\n\ntemplate <typename TSystem>\nTSystem& Registry::GetSystem() const {\n    auto system = systems.find(std::type_index(typeid(TSystem)));\n    return *(std::static_pointer_cast<TSystem>(system->second));\n}\n\ntemplate <typename TComponent, typename ...TArgs>\nvoid Registry::AddComponent(Entity entity, TArgs&& ...args) {\n    const auto componentId = Component<TComponent>::GetId();\n    const auto entityId = entity.GetId();\n\n    if (componentId >= componentPools.size()) {\n        componentPools.resize(componentId + 1, nullptr);\n    }\n\n    if (!componentPools[componentId]) {\n        std::shared_ptr<Pool<TComponent>> newComponentPool = std::make_shared<Pool<TComponent>>();\n        componentPools[componentId] = newComponentPool;\n    }\n\n    std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);\n\n    if (entityId >= componentPool->GetSize()) {\n        componentPool->Resize(numEntities);\n    }\n\n    TComponent newComponent(std::forward<TArgs>(args)...);\n\n    componentPool->Set(entityId, newComponent);\n\n    entityComponentSignatures[entityId].set(componentId);\n}\n\ntemplate <typename TComponent>\nvoid Registry::RemoveComponent(Entity entity) {\n\tconst auto componentId = Component<TComponent>::GetId();\n\tconst auto entityId = entity.GetId();\n\tentityComponentSignatures[entityId].set(componentId, false);\n}\n\ntemplate <typename TComponent>\nbool Registry::HasComponent(Entity entity) const {\n\tconst auto componentId = Component<TComponent>::GetId();\n\tconst auto entityId = entity.GetId();\n\treturn entityComponentSignatures[entityId].test(componentId);\n}\n\n#endif\n",
+					"file": "/home/pedro/.cache/.fr-I4V401/2dgameengine/src/ECS/ECS.h",
+					"file_size": 8347,
+					"file_write_time": 132525244850000000,
+					"settings":
+					{
+						"buffer_size": 8347,
+						"line_ending": "Unix"
+					},
+					"undo_stack":
+					[
+						[
+							4,
+							1,
+							"insert",
+							{
+								"characters": "/a"
+							},
+							"AgAAAKEXAAAAAAAAohcAAAAAAAAAAAAAohcAAAAAAACjFwAAAAAAAAAAAAA",
+							"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoRcAAAAAAAChFwAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							5,
+							1,
+							"insert",
+							{
+								"characters": "dd"
+							},
+							"AgAAAKMXAAAAAAAApBcAAAAAAAAAAAAApBcAAAAAAAClFwAAAAAAAAAAAAA",
+							"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoxcAAAAAAACjFwAAAAAAAAAAAAAAAPC/"
+						],
+						[
+							6,
+							4,
+							"left_delete",
+							null,
+							"BAAAAKQXAAAAAAAApBcAAAAAAAABAAAAZKMXAAAAAAAAoxcAAAAAAAABAAAAZKIXAAAAAAAAohcAAAAAAAABAAAAYaEXAAAAAAAAoRcAAAAAAAABAAAALw",
+							"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApRcAAAAAAAClFwAAAAAAAAAAAAAAAPC/"
+						]
+					]
+				},
+				{
+					"contents": "#ifndef ECS_H\n#define ECS_H\n\n#include \"../Logger/Logger.h\"\n#include <vector>\n#include <bitset>\n#include <set>\n#include <deque>\n#include <unordered_map>\n#include <typeindex>\n#include <memory>\n\nconst unsigned int MAX_COMPONENTS = 32;\n\n////////////////////////////////////////////////////////////////////////////////\n// Signature\n////////////////////////////////////////////////////////////////////////////////\n// We use a bitset (1s and 0s) to keep track of which components an entity has,\n// and also helps keep track of which entities a system is interested in.\n////////////////////////////////////////////////////////////////////////////////\ntypedef std::bitset<MAX_COMPONENTS> Signature;\n\nstruct IComponent {\n    protected:\n        static int nextId;\n};\n\n// Used to assign a unique id to a component type\ntemplate <typename T>\nclass Component: public IComponent {\n    public:\n        // Returns the unique id of Component<T>\n        static int GetId() {\n            static auto id = nextId++;\n            return id;\n        }\n};\n\nclass Entity {\n    private:\n        int id;\n\n    public:\n        Entity(int id): id(id) {};\n        Entity(const Entity& entity) = default;\n        void Kill();\n        int GetId() const;\n       \n        Entity& operator =(const Entity& other) = default;\n        bool operator ==(const Entity& other) const { return id == other.id; }\n        bool operator !=(const Entity& other) const { return id != other.id; }\n        bool operator >(const Entity& other) const { return id > other.id; }\n        bool operator <(const Entity& other) const { return id < other.id; }\n\n        template <typename TComponent, typename ...TArgs> void AddComponent(TArgs&& ...args);\n        template <typename TComponent> void RemoveComponent();\n        template <typename TComponent> bool HasComponent() const;\n        template <typename TComponent> TComponent& GetComponent() const;\n\n        // Hold a pointer to the entity's owner registry\n        class Registry* registry;\n};\n\n////////////////////////////////////////////////////////////////////////////////\n// System\n////////////////////////////////////////////////////////////////////////////////\n// The system processes entities that contain a specific signature\n////////////////////////////////////////////////////////////////////////////////\nclass System {\n    private:\n        Signature componentSignature;\n        std::vector<Entity> entities;\n\n    public:\n        System() = default;\n        ~System() = default;\n        \n        void AddEntityToSystem(Entity entity);\n        void RemoveEntityFromSystem(Entity entity);\n        std::vector<Entity> GetSystemEntities() const;\n        const Signature& GetComponentSignature() const;\n\n        // Defines the component type that entities must have to be considered by the system\n        template <typename TComponent> void RequireComponent();\n};\n\n////////////////////////////////////////////////////////////////////////////////\n// Pool\n////////////////////////////////////////////////////////////////////////////////\n// A pool is just a vector (contiguous data) of objects of type T\n////////////////////////////////////////////////////////////////////////////////\nclass IPool {\n    public:\n        virtual ~IPool() {}\n};\n\ntemplate <typename T>\nclass Pool: public IPool {\n    private:\n        std::vector<T> data;\n\n    public:\n        Pool(int size = 100) {\n            data.resize(size);\n        }\n\n        virtual ~Pool() = default;\n\n        bool isEmpty() const {\n            return data.empty();\n        }\n\n        int GetSize() const {\n            return data.size();\n        }\n\n        void Resize(int n) {\n            data.resize(n);\n        }\n\n        void Clear() {\n            data.clear();\n        }\n\n        void Add(T object) {\n            data.push_back(object);\n        }\n\n        void Set(int index, T object) {\n            data[index] = object;\n        }\n\n        T& Get(int index) {\n            return static_cast<T&>(data[index]);\n        }\n\n        T& operator [](unsigned int index) {\n            return data[index];\n        }\n};\n\n////////////////////////////////////////////////////////////////////////////////\n// Registry\n////////////////////////////////////////////////////////////////////////////////\n// The registry manages the creation and destruction of entities, add systems,\n// and components.\n////////////////////////////////////////////////////////////////////////////////\nclass Registry {\n    private:\n        int numEntities = 0;\n\n        // Vector of component pools, each pool contains all the data for a certain compoenent type\n        // [Vector index = component type id]\n        // [Pool index = entity id]\n        std::vector<std::shared_ptr<IPool>> componentPools;\n\n        // Vector of component signatures per entity, saying which component is turned \"on\" for a given entity\n        // [Vector index = entity id]\n        std::vector<Signature> entityComponentSignatures;\n\n        // Map of active systems\n        // [Map key = system type id]\n        std::unordered_map<std::type_index, std::shared_ptr<System>> systems;\n\n        // Set of entities that are flagged to be added or removed in the next registry Update()\n        std::set<Entity> entitiesToBeAdded;\n        std::set<Entity> entitiesToBeKilled;\n\n        // List of free entity ids that were previously removed\n        std::deque<int> freeIds;\n\n    public:\n        Registry() {\n            Logger::Log(\"Registry constructor called\");\n        }\n        \n        ~Registry() {\n            Logger::Log(\"Registry destructor called\");\n        }\n\n        // The registry Update() finally processes the entities that are waiting to be added/killed to the systems\n        void Update();\n        \n        // Entity management\n        Entity CreateEntity();\n        void KillEntity(Entity entity);\n\n        // Component management\n        template <typename TComponent, typename ...TArgs> void AddComponent(Entity entity, TArgs&& ...args);\n        template <typename TComponent> void RemoveComponent(Entity entity);\n\t\ttemplate <typename TComponent> bool HasComponent(Entity entity) const;\n        template <typename TComponent> TComponent& GetComponent(Entity entity) const;\n\n        // System management\n        template <typename TSystem, typename ...TArgs> void AddSystem(TArgs&& ...args);\n        template <typename TSystem> void RemoveSystem();\n        template <typename TSystem> bool HasSystem() const;\n        template <typename TSystem> TSystem& GetSystem() const;\n\n        // Add and remove entities from their systems\n        void AddEntityToSystems(Entity entity);\n        void RemoveEntityFromSystems(Entity entity);\n};\n\ntemplate <typename TComponent>\nvoid System::RequireComponent() {\n    const auto componentId = Component<TComponent>::GetId();\n    componentSignature.set(componentId);\n}\n\ntemplate <typename TSystem, typename ...TArgs>\nvoid Registry::AddSystem(TArgs&& ...args) {\n    std::shared_ptr<TSystem> newSystem = std::make_shared<TSystem>(std::forward<TArgs>(args)...);\n    systems.insert(std::make_pair(std::type_index(typeid(TSystem)), newSystem));\n}\n\ntemplate <typename TSystem>\nvoid Registry::RemoveSystem() {\n    auto system = systems.find(std::type_index(typeid(TSystem)));\n    systems.erase(system);\n}\n\ntemplate <typename TSystem>\nbool Registry::HasSystem() const {\n    return systems.find(std::type_index(typeid(TSystem))) != systems.end();\n}\n\ntemplate <typename TSystem>\nTSystem& Registry::GetSystem() const {\n    auto system = systems.find(std::type_index(typeid(TSystem)));\n    return *(std::static_pointer_cast<TSystem>(system->second));\n}\n\ntemplate <typename TComponent, typename ...TArgs>\nvoid Registry::AddComponent(Entity entity, TArgs&& ...args) {\n    const auto componentId = Component<TComponent>::GetId();\n    const auto entityId = entity.GetId();\n\n    if (componentId >= componentPools.size()) {\n        componentPools.resize(componentId + 1, nullptr);\n    }\n\n    if (!componentPools[componentId]) {\n        std::shared_ptr<Pool<TComponent>> newComponentPool(new Pool<TComponent>());\n        componentPools[componentId] = newComponentPool;\n    }\n\n    std::shared_ptr<Pool<TComponent>> componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);\n\n    if (entityId >= componentPool->GetSize()) {\n        componentPool->Resize(numEntities);\n    }\n\n    TComponent newComponent(std::forward<TArgs>(args)...);\n\n    componentPool->Set(entityId, newComponent);\n\n    entityComponentSignatures[entityId].set(componentId);\n\n    Logger::Log(\"Component id = \" + std::to_string(componentId) + \" was added to entity id \" + std::to_string(entityId));\n}\n\ntemplate <typename TComponent>\nvoid Registry::RemoveComponent(Entity entity) {\n\tconst auto componentId = Component<TComponent>::GetId();\n\tconst auto entityId = entity.GetId();\n\tentityComponentSignatures[entityId].set(componentId, false);\n    \n    Logger::Log(\"Component id = \" + std::to_string(componentId) + \" was removed from entity id \" + std::to_string(entityId));\n}\n\ntemplate <typename TComponent>\nbool Registry::HasComponent(Entity entity) const {\n\tconst auto componentId = Component<TComponent>::GetId();\n\tconst auto entityId = entity.GetId();\n\treturn entityComponentSignatures[entityId].test(componentId);\n}\n\ntemplate <typename TComponent>\nTComponent& Registry::GetComponent(Entity entity) const {\n\tconst auto componentId = Component<TComponent>::GetId();\n\tconst auto entityId = entity.GetId();\n    auto componentPool = std::static_pointer_cast<Pool<TComponent>>(componentPools[componentId]);\n    return componentPool->Get(entityId);\n}\n\ntemplate <typename TComponent, typename ...TArgs>\nvoid Entity::AddComponent(TArgs&& ...args) {\n    registry->AddComponent<TComponent>(*this, std::forward<TArgs>(args)...);\n}\n\ntemplate <typename TComponent>\nvoid Entity::RemoveComponent() {\n    registry->RemoveComponent<TComponent>(*this);\n}\n\ntemplate <typename TComponent>\nbool Entity::HasComponent() const {\n    return registry->HasComponent<TComponent>(*this);\n}\n\ntemplate <typename TComponent>\nTComponent& Entity::GetComponent() const {\n    return registry->GetComponent<TComponent>(*this);\n}\n\n#endif\n",
+					"file": "/home/pedro/.cache/.fr-CEHB11/2dgameengine/src/ECS/ECS.h",
+					"file_size": 10125,
+					"file_write_time": 132525244840000000,
+					"settings":
+					{
+						"buffer_size": 10125,
+						"line_ending": "Unix"
+					}
+				},
+				{
+					"contents": "-- Define a table with the values of the first level\nLevel = {\n    ----------------------------------------------------\n    -- Table to define the list of assets\n    ----------------------------------------------------\n    assets = {\n        [0] =\n        { type = \"texture\", id = \"tilemap-texture\", file = \"./assets/tilemaps/jungle.png\" },\n        { type = \"texture\", id = \"chopper-texture\", file = \"./assets/images/chopper-green-spritesheet.png\" },\n        { type = \"texture\", id = \"tank-texture\",    file = \"./assets/images/tank-tiger-up.png\" },\n        { type = \"texture\", id = \"bullet-texture\",  file = \"./assets/images/bullet.png\" },\n        { type = \"font\"   , id = \"pico8-font-5\",    file = \"./assets/fonts/pico8.ttf\", font_size = 5 },\n        { type = \"font\"   , id = \"pico8-font-10\",   file = \"./assets/fonts/pico8.ttf\", font_size = 10 }\n    },\n\n    ----------------------------------------------------\n    -- table to define the map config variables\n    ----------------------------------------------------\n    tilemap = {\n        map_file = \"./assets/tilemaps/jungle.map\",\n        texture_asset_id = \"tilemap-texture\",\n        num_rows = 20,\n        num_cols = 25,\n        tile_size = 32,\n        scale = 2.0\n    },\n\n    ----------------------------------------------------\n    -- table to define entities and their components\n    ----------------------------------------------------\n    entities = {\n        [0] =\n        {\n            -- Player\n            tag = \"player\",\n            components = {\n                transform = {\n                    position = { x = 242, y = 110 },\n                    scale = { x = 1.0, y = 1.0 },\n                    rotation = 0.0, -- degrees\n                },\n                rigidbody = {\n                    velocity = { x = 0.0, y = 0.0 }\n                },\n                sprite = {\n                    texture_asset_id = \"chopper-texture\",\n                    width = 32,\n                    height = 32,\n                    z_index = 4,\n                    fixed = false,\n                    src_rect_x = 0,\n                    src_rect_y = 0\n                },\n                animation = {\n                    num_frames = 2,\n                    speed_rate = 10 -- fps\n                },\n                boxcollider = {\n                    width = 32,\n                    height = 25,\n                    offset = { x = 0, y = 5 }\n                },\n                health = {\n                    health_percentage = 100\n                },\n                projectile_emitter = {\n                    projectile_velocity = { x = 200, y = 200 },\n                    projectile_duration = 10, -- seconds\n                    repeat_frequency = 0, -- seconds\n                    hit_percentage_damage = 10,\n                    friendly = true\n                },\n                keyboard_controller = {\n                    up_velocity = { x = 0, y = -50 },\n                    right_velocity = { x = 50, y = 0 },\n                    down_velocity = { x = 0, y = 50 },\n                    left_velocity = { x = -50, y = 0 }\n                },\n                camera_follow = {\n                    follow = true\n                }\n            }\n        },\n        {\n            -- Tank\n            group = \"enemies\",\n            components = {\n                transform = {\n                    position = { x = 200, y = 497 },\n                    scale = { x = 1.0, y = 1.0 },\n                    rotation = 0.0, -- degrees\n                },\n                sprite = {\n                    texture_asset_id = \"tank-texture\",\n                    width = 32,\n                    height = 32,\n                    z_index = 2\n                },\n                boxcollider = {\n                    width = 25,\n                    height = 18,\n                    offset = { x = 0, y = 7 }\n                },\n                health = {\n                    health_percentage = 100\n                },\n                projectile_emitter = {\n                    projectile_velocity = { x = 100, y = 0 },\n                    projectile_duration = 2, -- seconds\n                    repeat_frequency = 1, -- seconds\n                    hit_percentage_damage = 20,\n                    friendly = false\n                }\n            }\n        }\n    }\n}",
+					"file": "/home/pedro/.cache/.fr-4L8611/2dgameengine/assets/scripts/Level1.lua",
+					"file_size": 4289,
+					"file_write_time": 132537594160000000,
+					"redo_stack":
+					[
+						[
+							9,
+							1,
+							"insert",
+							{
+								"characters": " "
+							},
+							"AgAAAAEAAAAAAAAAwhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAg",
+							"AQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAAAAAAAAAAAAAPC/"
+						]
+					],
+					"settings":
+					{
+						"buffer_size": 4289,
+						"line_ending": "Unix"
+					},
+					"undo_stack":
+					[
+					]
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 0.0,
+				"history":
+				[
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/pedro/.cache/.fr-4Y2501/2dgameengine/src/Systems/RenderColliderSystem.h",
+				"/home/pedro/.cache/.fr-G3P501/2dgameengine/src/Systems/MovementSystem.h",
+				"/home/pedro/.cache/.fr-RVUU01/2dgameengine/src/ECS/ECS.h",
+				"/home/pedro/Downloads/openai.env",
+				"/home/pedro/Downloads/openai (1).env"
+			],
+			"find":
+			{
+				"height": 26.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"addEnti"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"scrollbar_highlights": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"use_gitignore": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"groups":
+			[
+				{
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/home/pedro/.cache/.fr-I4V401/2dgameengine/src/ECS/ECS.h",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 8347,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										5200,
+										5212
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/C++/C++.sublime-syntax",
+									"tab_size": 4,
+									"translate_tabs_to_spaces": true
+								},
+								"translation.x": 0.0,
+								"translation.y": 2543.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 2,
+							"stack_multiselect": false,
+							"type": "text"
+						},
+						{
+							"buffer": 1,
+							"file": "/home/pedro/.cache/.fr-CEHB11/2dgameengine/src/ECS/ECS.h",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 10125,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										2485,
+										2433
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/C++/C++.sublime-syntax",
+									"tab_size": 4,
+									"translate_tabs_to_spaces": true
+								},
+								"translation.x": 0.0,
+								"translation.y": 1477.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 1,
+							"stack_multiselect": false,
+							"type": "text"
+						},
+						{
+							"buffer": 2,
+							"file": "/home/pedro/.cache/.fr-4L8611/2dgameengine/assets/scripts/Level1.lua",
+							"selected": true,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 4289,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										4289,
+										4289
+									]
+								],
+								"settings":
+								{
+									"syntax": "Packages/Lua/Lua.sublime-syntax",
+									"tab_size": 4,
+									"translate_tabs_to_spaces": true
+								},
+								"translation.x": 0.0,
+								"translation.y": 1322.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"stack_multiselect": false,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 26.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"position": "0,0,0,0,0,1720,34,3436,1436,3440,1440,1",
+			"project": "",
+			"replace":
+			{
+				"height": 48.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+			},
+			"show_minimap": true,
+			"show_open_files": false,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 150.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 1,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}
