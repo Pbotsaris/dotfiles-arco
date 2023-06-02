@@ -99,6 +99,8 @@ A custom bin folder is exported to `$PATH ` from `~/.config/scripts`.
 ### scripts
 
 - `t` shortcuts for tmux.
+- `ss` screen shots the full screen. Saves to `/home/$USER`
+- `ss-gui` will launch the GUI tools for screen shots. You can crop and other edits before screen shooting.
 - `caps_as_esc.sh` aliased as `cae` for caps key to function as the esc key.
 - `connect-bluetooth.sh`. This is launched by `systemd` on boot to connect devices. New bluetooth devices to be added to this script. 
 - `clip`. clips first argument to the clipboard using `xclip`. Also aliased as `cpy`.
