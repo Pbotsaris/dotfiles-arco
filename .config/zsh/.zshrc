@@ -8,6 +8,9 @@ export EDITOR=vim
 fpath+=$HOME/.config/zsh/pure
 
 
+# miniconda3
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
