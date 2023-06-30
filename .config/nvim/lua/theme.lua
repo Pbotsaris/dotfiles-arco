@@ -1,3 +1,3 @@
 vim.o.background = "dark"
-vim.cmd("colorscheme terafox")
+vim.cmd("colorscheme nordfox")
 

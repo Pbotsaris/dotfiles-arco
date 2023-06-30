@@ -23,17 +23,14 @@ require'lspconfig'.jsonls.setup {
     require('lsp.settings.json-ls')
 }
 
-require'lspconfig'.solargraph.setup {
-    require('lsp.settings.solargraph')
-}
-
+require'lspconfig'.solargraph.setup{}
 require'lspconfig'.tsserver.setup {}
 require'lspconfig'.cmake.setup {}
 require'lspconfig'.svelte.setup {}
 require'lspconfig'.tsserver.setup {}
 require'lspconfig'.tailwindcss.setup {}
 require'lspconfig'.gopls.setup {}
-require'lspconfig'.bashls.setup {}
+require'lspconfig'.bashls.setup{}
 require'lspconfig'.elixirls.setup {}
 require'lspconfig'.cssls.setup {}
 
@@ -48,6 +45,8 @@ require'lspconfig'.sqls.setup{ cmd = {"/home/pedro/go/bin/sqls", "-config", "/ho
 }
 require'lspconfig'.dartls.setup{}
 
-require("lsp.lsp_setup").setup()
 
+
+require("lsp.lsp_setup").setup()
+require("lsp.null_ls")
 require'lspconfig'

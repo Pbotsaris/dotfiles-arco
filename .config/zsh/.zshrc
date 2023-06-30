@@ -7,6 +7,9 @@ ZSH_THEME=""
 export EDITOR=vim
 fpath+=$HOME/.config/zsh/pure
 
+# ruby
+
+source ${HOME}/.rvm/scripts/rvm
 
 # miniconda3
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
@@ -95,7 +98,10 @@ prompt pure
 # USER CONFIG
 
 ## add gem bins to $PATH
-export PATH="/home/pedro/.local/share/gem/ruby/3.0.0/bin:$PATH"
+export PATH="${HOME}/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
+# Latex to path
+export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 
 ## Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
