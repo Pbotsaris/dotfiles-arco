@@ -224,3 +224,4 @@ source /usr/share/nvm/init-nvm.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 alias luamake=/home/pedro/.lua-ls/lua-language-server/3rd/luamake/luamake
+export PATH="${HOME}/.local/cy:$PATH"

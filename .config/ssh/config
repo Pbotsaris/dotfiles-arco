@@ -24,3 +24,6 @@ Host git.us.qwasar.io
 Host github.com
  HostName github.com
  IdentityFile ~/.ssh/id_rsa
+
+Host *
+	IdentityAgent ~/.1password/agent.sock
