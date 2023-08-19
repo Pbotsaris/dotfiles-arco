@@ -16,24 +16,26 @@ local diagnostics = null_ls.builtins.diagnostics
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/completion
 -- local completion = null_ls.builtins.completion
+--
+local sources = {
+  -- formating
+  formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+  formatting.black.with({ extra_args = { "--fast" } }),
+  formatting.stylua,
+  formatting.mix,
+  formatting.rubocop,
+
+  -- only run eslint if we have a .eslintrc file in the project
+  diagnostics.eslint_d.with({
+    condition = function(utils)
+      return utils.root_has_file({ ".eslintrc.js" })
+    end,
+  }),
+}
 
 null_ls.setup({
   debug = false,
-  sources = {
-    -- formating
-    formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
-    formatting.black.with({ extra_args = { "--fast" } }),
-    formatting.stylua,
-    formatting.mix,
-    formatting.rubocop,
-
-    -- only run eslint if we have a .eslintrc file in the project
-    diagnostics.eslint_d.with({
-      condition = function(utils)
-        return utils.root_has_file({ '.eslintrc.js' })
-      end
-    }),
-  },
+  sources = sources,
 
   -- Here we set a conditional to call the rubocop formatter.
   -- If we have a Gemfile in the project, we call "bundle exec rubocop", if not we only call "rubocop".
@@ -41,10 +43,7 @@ null_ls.setup({
     return utils.root_has_file("Gemfile")
         and null_ls.builtins.formatting.rubocop.with({
           command = "bundle",
-          args = vim.list_extend(
-            { "exec", "rubocop" },
-            null_ls.builtins.formatting.rubocop._opts.args
-          ),
+          args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.formatting.rubocop._opts.args),
         })
         or null_ls.builtins.formatting.rubocop
   end),
@@ -53,12 +52,8 @@ null_ls.setup({
     return utils.root_has_file("Gemfile")
         and null_ls.builtins.diagnostics.rubocop.with({
           command = "bundle",
-          args = vim.list_extend(
-            { "exec", "rubocop" },
-            null_ls.builtins.diagnostics.rubocop._opts.args
-          ),
+          args = vim.list_extend({ "exec", "rubocop" }, null_ls.builtins.diagnostics.rubocop._opts.args),
         })
         or null_ls.builtins.diagnostics.rubocop
   end),
 })
-
