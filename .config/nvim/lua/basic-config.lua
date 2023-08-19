@@ -44,6 +44,7 @@ set tabstop=2
 set shiftwidth=2
 set tags=tags
 set backup
+set nohidden
 set backupdir=~/.vim/.backup//
 au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
 set backupcopy=yes

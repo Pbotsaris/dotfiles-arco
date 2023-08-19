@@ -68,7 +68,6 @@ return packer.startup {
     use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
     -- language specific
-    use 'ray-x/go.nvim'
     use 'averms/black-nvim'
     use 'pangloss/vim-javascript'
     use 'mhinz/vim-mix-format'
@@ -110,7 +109,6 @@ return packer.startup {
 
     -- LSP
     use "neovim/nvim-lspconfig" -- enable LSP
-   -- use "williamboman/nvim-lsp-installer"  (deprecated)
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
