@@ -1,0 +1,5 @@
+/home/pedro/.nvm/versions/node/v18.17.0/lib
+├── @tailwindcss/language-server@0.0.13
+├── corepack@0.18.0
+└── npm@9.6.7
+
