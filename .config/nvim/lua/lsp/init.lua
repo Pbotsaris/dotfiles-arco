@@ -27,7 +27,7 @@ function M.setup()
 
   mason_lsconfig.setup_handlers({
     function(server_name)
-      local has_settings, settings = pcall(require, "lspconfig.settings" .. server_name)
+      local has_settings, settings = pcall(require, "lsp.settings." .. server_name)
       if has_settings then
         lspconfig[server_name].setup(settings)
       else
@@ -40,43 +40,4 @@ function M.setup()
 end
 
 return M
-
----- INFO: DELETE ME
--- require'lspconfig'.lua_ls.setup{
---     require('lsp.settings.lua_ls')
--- }
---
--- require'lspconfig'.pyright.setup{
---     require('lsp.settings.pyright')
--- }
---
--- require'lspconfig'.jsonls.setup {
---     require('lsp.settings.json-ls')
--- }
---
--- require'lspconfig'.solargraph.setup{}
--- require'lspconfig'.tsserver.setup {}
--- require'lspconfig'.cmake.setup {}
--- require'lspconfig'.svelte.setup {}
--- require'lspconfig'.tailwindcss.setup {}
--- require'lspconfig'.gopls.setup {}
--- require'lspconfig'.bashls.setup{}
---
--- require'lspconfig'.elixirls.setup {
---   cmd ={"/home/pedro/.elixirls/language_server.sh"}
--- }
---
--- require'lspconfig'.cssls.setup {}
---
---
--- require'lspconfig'.sqls.setup{ cmd = {"/home/pedro/go/bin/sqls", "-config", "/home/pedro/.config/sqls/config.yml"};
--- }
--- require'lspconfig'.dartls.setup{}
---
---
---
--- require("lsp.lsp_setup").setup()
--- require("lsp.null_ls")
--- require'lspconfig'
-
 

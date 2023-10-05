@@ -37,8 +37,8 @@ return packer.startup {
     --  User interface
     use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
     use { 'kyazdani42/nvim-tree.lua',
+    'kyazdani42/nvim-web-devicons', -- optional, for file icons
       requires = {
-        'kyazdani42/nvim-web-devicons', -- optional, for file icons
       },
       tag = 'nightly' -- optional, updated every week.
     }
@@ -94,6 +94,8 @@ return packer.startup {
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
       setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
+    -- REPL
+    -- use 'bfredl/nvim-ipy'
 
     -- keybinds
     use 'folke/which-key.nvim'

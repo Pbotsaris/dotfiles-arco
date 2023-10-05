@@ -1,10 +1,15 @@
 
 local keymap = vim.api.nvim_set_keymap -- shorten
 
+-- NOTE: that cpm mappings are in lua/cpm.lua
+
 -- leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+
+-- copilot
+keymap('i', '<C-c>', 'copilot#Accept("<CR>")', { noremap = false, silent = true, expr= true })
 
 -- splits
 keymap('n', 'vs', ':vs<CR>', { noremap = true })
@@ -45,13 +50,12 @@ keymap('n','<c-j>', '<Esc>:m .+1<CR>==', {noremap = true})
 keymap('i','<c-j>', '<Esc>:m .+1<CR>==', {noremap = true})
 keymap('v','J', ":m '>+1<CR>gv=gv", {noremap = true})
 
-keymap('i', ',', ',<c-g>u', {noremap = true})
 -- undo breakpoints
+keymap('i', ',', ',<c-g>u', {noremap = true})
 keymap('i', '.', '.<c-g>u', {noremap = true})
 keymap('i', '(', '(<c-g>u', {noremap = true})
 keymap('i', '[', '[<c-g>u', {noremap = true})
 keymap('i', '{', '{<c-g>u', {noremap = true})
-
 
 -- Setting breakpoints via :lua require'dap'.toggle_breakpoint().
 -- Launching debug sessions and resuming execution via :lua require'dap'.continue().
@@ -70,8 +74,8 @@ keymap('n', '<c-d>', ":lua require'dap'.repl.open() <CR>", {noremap = true})
 keymap('n', 'n', 'nzzzv', {noremap = true})
 keymap('n', 'N', 'Nzzzv', {noremap = true})
 
-keymap('n', '<c-{>', 'ysiw}', {noremap = true})
 
+keymap('n', '<c-{>', 'ysiw}', {noremap = true})
 
 -- lsp
   vim.keymap.set( "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
