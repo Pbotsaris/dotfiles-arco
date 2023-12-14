@@ -24,6 +24,8 @@ local sources = {
   formatting.stylua,
   formatting.mix,
   formatting.rubocop,
+  formatting.prettier,
+
 
   -- only run eslint if we have a .eslintrc file in the project
   diagnostics.eslint_d.with({

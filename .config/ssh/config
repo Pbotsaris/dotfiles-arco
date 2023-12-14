@@ -20,6 +20,12 @@ Host git.us.qwasar.io
   User git
 	IdentityFile ~/.ssh/qwasar_key_priv
 
+Host speak.antfood.com
+		HostName 142.93.244.165
+		IdentityFile ~/.ssh/id_rsa
+     User pb
+
+
 
 Host github.com
  HostName github.com
