@@ -11,7 +11,7 @@ require('lualine').setup {
   sections = {
     lualine_a = {{'mode', padding = 2}},
 	  lualine_b = {{'branch', 'diff', 'diagnostics', padding = 2}},
-    lualine_c = {{'filename', padding = 2}},
+    lualine_c = {{'filename', padding = 2, path = 1}},
     lualine_x = {'encoding', '', 'filetype'},
     lualine_y = {},
     lualine_z = {'location'}

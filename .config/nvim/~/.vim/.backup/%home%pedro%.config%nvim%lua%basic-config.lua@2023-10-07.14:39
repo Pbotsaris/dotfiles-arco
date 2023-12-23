@@ -2,7 +2,7 @@
 
 vim.wo.number = true
 vim.o.termguicolors = true
-vim.o.clipboard = "unnamedplus"      -- yanks and delete to + register therefore os clipboard
+vim.o.clipboard = "unnamedplus"      -- yanks and delete to + register therefore os cclipboard
 vim.o.cmdheight = 2                  -- more space to display in nvim command line (bottom)
 vim.o.timeoutlen = 100                -- for search next word not too be too slow
 vim.o.smartcase = true
@@ -38,10 +38,8 @@ vim.o.shiftwidth = 3
 vim.o.tags = 'tags'
 vim.o.hidden = false
 vim.o.backup = true
-vim.o.backupdir = vim.env.HOME ..  '/.vim/.backup//'
+vim.o.backupdir = '~/.vim/.backup//'
 vim.o.backupcopy = 'yes'
 vim.cmd('au BufWritePre * let &bex = "@" . strftime("%F.%H:%M")')
-vim.o.undodir = vim.env.HOME .. '/.vim/.undo//'
-
--- shows the relative path of the files in the bottom status line
+vim.o.undodir = "~/.vim/.undo//"
 -- let g:python3_host_prog = '/home/pedro/.conda/envs/pb/bin/python'
