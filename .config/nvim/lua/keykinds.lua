@@ -12,8 +12,8 @@ keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 keymap('i', '<C-c>', 'copilot#Accept("<CR>")', { noremap = false, silent = true, expr= true })
 
 -- splits
-keymap('n', 'vs', ':vs<CR>', { noremap = true })
 keymap('n', 'sp', ':sp<CR>', { noremap = true })
+keymap('n', 'vs', ':vs<CR>', { noremap = true })
 
 -- resize splits
 keymap('n', '<C-Left>', '<C-w><', {})
@@ -22,7 +22,7 @@ keymap('n', '<C-Up>', '<C-w>+', {})
 keymap('n', '<C-Down>', '<C-w>-', {})
 
 -- cycle buffers
-keymap('n',"nb", ":BufferLineCycleNext<CR>", {noremap = true, silent = true})
+keymap('n',"<C-n>", ":BufferLineCycleNext<CR>", {noremap = true, silent = true})
 
 -- tabs
 keymap('n', 'tn', ':tabnew<CR>', { noremap = true })
@@ -73,7 +73,6 @@ keymap('n', '<c-d>', ":lua require'dap'.repl.open() <CR>", {noremap = true})
 -- n centers with z
 keymap('n', 'n', 'nzzzv', {noremap = true})
 keymap('n', 'N', 'Nzzzv', {noremap = true})
-
 
 keymap('n', '<c-{>', 'ysiw}', {noremap = true})
 
