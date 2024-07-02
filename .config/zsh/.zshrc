@@ -7,12 +7,11 @@ ZSH_THEME=""
 export EDITOR=vim
 fpath+=$HOME/.config/zsh/pure
 
-# ruby
-
-source ${HOME}/.rvm/scripts/rvm
-
 # miniconda3
 [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+# fzf
+source <(fzf --zsh)
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -98,7 +97,6 @@ prompt pure
 # USER CONFIG
 
 ## add gem bins to $PATH
-export PATH="${HOME}/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 # Latex to path
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
@@ -200,7 +198,7 @@ source /usr/share/nvm/init-nvm.sh
 
  alias shell-config="vim ~/.config/zsh/.zshrc"
  alias i3-config="vim ~/.config/i3/config"
- alias term-config="vim ~/.config/alacritty/alacritty.yml"
+ alias term-config="vim ~/.config/alacritty/alacritty.toml"
  alias picom-config="nvim ~/.config/picom/picom.conf"
  alias vim-config="vim ~/.config/vim/.vim"
  alias nvim-config="cd ~/.config/nvim; nvim init.lua"
@@ -224,4 +222,12 @@ source /usr/share/nvm/init-nvm.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 
 alias luamake=/home/pedro/.lua-ls/lua-language-server/3rd/luamake/luamake
+
+## RUBY
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.3.1/bin"
+
+# cyanite
 export PATH="${HOME}/.local/cy:$PATH"
+

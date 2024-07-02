@@ -151,10 +151,15 @@ _G.packer_plugins = {
     path = "/home/pedro/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
     url = "https://github.com/EdenEast/nightfox.nvim"
   },
-  ["null-ls.nvim"] = {
+  ["none-ls-extras.nvim"] = {
     loaded = true,
-    path = "/home/pedro/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+    path = "/home/pedro/.local/share/nvim/site/pack/packer/start/none-ls-extras.nvim",
+    url = "https://github.com/nvimtools/none-ls-extras.nvim"
+  },
+  ["none-ls.nvim"] = {
+    loaded = true,
+    path = "/home/pedro/.local/share/nvim/site/pack/packer/start/none-ls.nvim",
+    url = "https://github.com/nvimtools/none-ls.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -175,6 +180,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/pedro/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-spectre"] = {
+    loaded = true,
+    path = "/home/pedro/.local/share/nvim/site/pack/packer/start/nvim-spectre",
+    url = "https://github.com/nvim-pack/nvim-spectre"
   },
   ["nvim-tree.lua"] = {
     loaded = true,

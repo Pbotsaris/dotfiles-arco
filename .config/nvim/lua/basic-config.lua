@@ -1,7 +1,6 @@
 -- use :h options to see all ops
 
 vim.wo.number = true
-vim.o.termguicolors = true
 vim.o.clipboard = "unnamedplus"      -- yanks and delete to + register therefore os clipboard
 vim.o.cmdheight = 2                  -- more space to display in nvim command line (bottom)
 vim.o.timeoutlen = 100                -- for search next word not too be too slow

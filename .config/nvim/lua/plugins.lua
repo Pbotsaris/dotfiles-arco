@@ -40,7 +40,7 @@ return packer.startup({
          "kyazdani42/nvim-tree.lua",
          "kyazdani42/nvim-web-devicons", -- optional, for file icons
          requires = {},
-         tag = "nightly",          -- optional, updated every week.
+         tag = "nightly",                -- optional, updated every week.
       })
 
       use({
@@ -54,11 +54,18 @@ return packer.startup({
          requires = { { "nvim-lua/plenary.nvim" } },
       })
 
+      -- Find and Replace
+
+      use({
+         "nvim-pack/nvim-spectre",
+         requires = { { "nvim-lua/plenary.nvim" } },
+      })
+
       --  completion
-      use("hrsh7th/nvim-cmp")     -- The completion plugin
-      use("hrsh7th/cmp-buffer")   -- buffer completions
-      use("hrsh7th/cmp-path")     -- path completions
-      use("hrsh7th/cmp-cmdline")  -- cmdline completions
+      use("hrsh7th/nvim-cmp")         -- The completion plugin
+      use("hrsh7th/cmp-buffer")       -- buffer completions
+      use("hrsh7th/cmp-path")         -- path completions
+      use("hrsh7th/cmp-cmdline")      -- cmdline completions
       use("saadparwaiz1/cmp_luasnip") -- snippet completions
       use("hrsh7th/cmp-nvim-lsp")
 
@@ -66,7 +73,7 @@ return packer.startup({
       use("github/copilot.vim")
 
       -- snippets
-      use("L3MON4D3/LuaSnip")         --snippet engine
+      use("L3MON4D3/LuaSnip")             --snippet engine
       use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
       -- language specific
@@ -135,7 +142,11 @@ return packer.startup({
       use("neovim/nvim-lspconfig") -- enable LSP
       use("williamboman/mason.nvim")
       use("williamboman/mason-lspconfig.nvim")
-      use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+
+      use({
+         "nvimtools/none-ls.nvim",
+       requires = { "nvimtools/none-ls-extras.nvim"},
+      })
 
       -- Debug
       use("mfussenegger/nvim-dap")

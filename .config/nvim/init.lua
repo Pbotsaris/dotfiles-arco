@@ -1,5 +1,4 @@
 require("plugins")
-require("treesitter-config")
 require("nvim-tree-config")
 require("which-keys")
 require("basic-config")

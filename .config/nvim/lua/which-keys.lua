@@ -23,7 +23,6 @@ local opts = {
 wk.register({
    w = { "<cmd>w!<cr>", "save file" },
    q = { "<cmd>q<cr>", "quit" },
-   p = { ":Prettier", "Prettier" },
    f = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Telescope files" },
    s = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Telescope Git Files" },
    g = { "<cmd>lua require('telescope.builtin').live_grep()<CR>", "telescope grep" },
