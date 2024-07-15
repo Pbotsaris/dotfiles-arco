@@ -22,10 +22,14 @@ vim.o.numberwidth = 4
 vim.o.termguicolors = true
 
 vim.o.colorcolumn = '120'
-
 vim.o.showtabline = 2
 vim.o.signcolumn = 'yes'
 vim.o.mouse = 'a'
+
+
+-- Providers
+vim.g.python3_host_prog = '/usr/bin/python'
+
 
 -- copilot work with <tab>
 vim.g.copilot_no_tab_map = true

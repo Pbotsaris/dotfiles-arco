@@ -13,7 +13,12 @@ require("nvim-treesitter.configs").setup({
       "heex",
       "html",
       "surface",
+      "ruby",
+      "python",
    },
+   modules = {},
+   auto_install = true,
+   ignore_install = {},
    sync_install = false,
    ident = { enable = true },
    highlight = {
