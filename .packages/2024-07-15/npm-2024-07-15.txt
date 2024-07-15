@@ -1,0 +1,6 @@
+/home/pedro/.nvm/versions/node/v20.12.2/lib
+├── @airtable/blocks-cli@2.0.4
+├── corepack@0.25.2
+├── graphql-language-service-cli@3.3.33
+└── npm@10.5.0
+
