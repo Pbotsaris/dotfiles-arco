@@ -25,6 +25,7 @@ if [ -z "$1" ]; then
 		printf "	$bld $ $end t a $des  <sesh-name> $end\t\t\t attach/open session\n"
 		printf "	$bld $ $end t i $des  <sesh-name> $end\t\t\t See all sessions, panes and windows\n"
 		printf "	$bld $ $end t ls $des <sesh-name> $end\t\t\t List all sessions\n"
+		printf "	$bld $ $end t s $end\t\t\t\t Source config\n"
 		printf "	$bld $ $end t c $spc $spc $spc $spc $psc $spc \t\t\t$end Open config\n"
 		echo " "
 fi
@@ -62,8 +63,11 @@ if [ "$1" == "a" ]; then
 		fi
 fi
 
-
-
+if [ "$1" == "s" ]; then
+   echo "Sourcing ""$HOME""/.config/tmux/tmux.conf..."
+   tmux source-file "$HOME""/.config/tmux/tmux.conf"
+fi
+	
 if [ "$1" == "i" ]; then
 		tmux info
 fi

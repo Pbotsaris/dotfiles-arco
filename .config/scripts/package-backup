@@ -15,6 +15,7 @@ PACMAN="$D/pacman-$DATE.txt"
 PIP="$D/pip-$DATE.txt"
 NPM="$D/npm-$DATE.txt"
 YAY="$D/yay-$DATE.txt"
+GEM="$D/gem-$DATE.txt"
 echo ""
 
 echo -e "Listing pacman and saving to:${CYAN}$PACMAN${NC}"
@@ -30,6 +31,11 @@ echo "- Done!"
 
 echo -e "Listing npm and saving to:${CYAN}$NPM${NC}"
 npm ls -g > "$NPM"
+echo "- Done!"
+
+echo -e "Listing gems and saving to:${CYAN}$GEM${NC}"
+gem list --local > "$GEM"
+
 echo "- All done!"
 
 
